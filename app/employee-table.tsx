@@ -50,6 +50,24 @@ export default function EmployeeTable() {
   const onCellEditComplete = (e) => {
     let { rowData, newValue, field, originalEvent: event } = e;
 
+    switch (field) {
+      case 'email':
+
+        const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+        if (newValue.match(isValidEmail) == null) {
+          console.log('Invalid Email');
+          alert('Invalid Email');
+          event.preventDefault();
+          return false;
+        }
+
+        break;
+
+      default:
+        break;
+    }
+
     type ReqBody = {[key: string] : string}
     let reqBody: ReqBody = {[field]: newValue};
 
@@ -63,7 +81,19 @@ export default function EmployeeTable() {
     })
     .then((response) => response.json())
     .then((res) => {
-      rowData[field] = newValue;
+      console.log('Masuk Fetch');
+      console.log(res);
+
+
+      if (res.status == 'failed') {
+        alert(res.message);
+        event.preventDefault();
+      }
+      else {
+        rowData[field] = newValue;
+      }
+
+
     })
     .catch((error) => console.log(error));
 
@@ -102,7 +132,7 @@ export default function EmployeeTable() {
 
   return (
     <div className="card p-fluid">
-      <DataTable value={employees} editMode="cell" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: '50rem' }}>
+      <DataTable showGridlines value={employees} editMode="cell" paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: '50rem' }}>
         {columns.map(({ field, header }) => {
           return <Column key={field} field={field} header={header} sortable style={{ width: '25%' }} editor={(options) => cellEditor(options)} onCellEditComplete={onCellEditComplete} />;
         })}
