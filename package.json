@@ -1,0 +1,32 @@
+{
+  "name": "ambisius-interview-test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "ag-grid-react": "^31.3.1",
+    "next": "14.2.3",
+    "primeflex": "^3.3.1",
+    "primereact": "^10.6.5",
+    "react": "^18",
+    "react-data-table-component": "^7.6.2",
+    "react-dom": "^18",
+    "styled-components": "^6.1.9"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
